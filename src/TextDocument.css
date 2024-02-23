@@ -1,0 +1,24 @@
+.text-document-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+}
+
+.document-title {
+  margin-top: 0;
+}
+
+.custom-textarea {
+  width: 60vw; /* Adjust width as needed */
+  height: 80vh; /* Adjust height as needed */
+  font-size: 24px; /* Adjust font size as needed */
+  padding: 20px; /* Adjust padding as needed */
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  line-height: 1.5;
+  resize: none; /* Disable textarea resizing */
+  overflow-y: scroll; /* Enable vertical scrolling */
+}
