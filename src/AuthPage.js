@@ -1,33 +1,43 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "./AuthContext";
 
-const AuthPage = ({ authType, setAuthenticated }) => {
-  const navigate = useNavigate(); // Use the useNavigate hook to get the navigate function
+const AuthPage = ({ authType }) => {
+  const navigate = useNavigate();
+  const { login } = useAuth();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent the default form submission behavior
-    const response = await fetch(
-      `${process.env.REACT_APP_API_URL}/auth/${authType}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
+    e.preventDefault();
+
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/auth/${authType}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username, password }),
+        }
+      );
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error);
       }
-    );
-    const data = await response.json();
-    if (response.ok) {
+
+      const data = await response.json();
       localStorage.setItem("token", data.token);
-      localStorage.setItem("userId", data.userId); // Set user ID in localStorage
-      setAuthenticated(true); // Set authentication state to true
-      navigate("/documents"); // Redirect to the DocumentsPage
-    } else {
-      console.error(data.error);
-      // Handle error (e.g., display error message)
+      localStorage.setItem("userId", data.userId);
+      login();
+      navigate("/documents");
+    } catch (error) {
+      console.error(error);
+      setError(error.message);
     }
   };
 
@@ -53,6 +63,7 @@ const AuthPage = ({ authType, setAuthenticated }) => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+        {error && <div style={{ color: "red" }}>{error}</div>}
         <button type="submit">
           {authType === "signup" ? "Sign Up" : "Log In"}
         </button>

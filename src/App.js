@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -7,19 +7,12 @@ import {
 } from "react-router-dom";
 import TextDocument from "./TextDocument";
 import AuthPage from "./AuthPage";
-import DocumentsPage from "./DocumentsPage"; // Import the DocumentsPage component
+import DocumentsPage from "./DocumentsPage";
 import NotFound from "./NotFound";
+import { useAuth } from "./AuthContext";
 
 function App() {
-  const [authenticated, setAuthenticated] = useState(false);
-
-  // Check if the user is authenticated on component mount
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setAuthenticated(true);
-    }
-  }, []);
+  const { authenticated } = useAuth();
 
   return (
     <Router>
@@ -30,20 +23,10 @@ function App() {
         )}
 
         {/* Route for login page */}
-        <Route
-          path="/login"
-          element={
-            <AuthPage authType="login" setAuthenticated={setAuthenticated} />
-          }
-        />
+        <Route path="/login" element={<AuthPage authType="login" />} />
 
         {/* Route for signup page */}
-        <Route
-          path="/signup"
-          element={
-            <AuthPage authType="signup" setAuthenticated={setAuthenticated} />
-          }
-        />
+        <Route path="/signup" element={<AuthPage authType="signup" />} />
 
         {/* Routes for authenticated users */}
         {authenticated && (
