@@ -1,6 +1,6 @@
 // TextDocument.js
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import io from "socket.io-client";
 import "./TextDocument.css";
 
@@ -26,6 +26,11 @@ const TextDocument = () => {
       socketIo.disconnect();
     };
   }, [roomId]);
+
+  // If roomId is not a valid UUID, navigate to 404 page
+  if (!roomId.match(/^[a-f\d]{8}-([a-f\d]{4}-){3}[a-f\d]{12}$/i)) {
+    return <Navigate to="/404" />;
+  }
 
   const handleTextChange = (event) => {
     setText(event.target.value);
