@@ -1,5 +1,3 @@
-// App.js
-
 import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
@@ -10,23 +8,16 @@ import {
 import TextDocument from "./TextDocument";
 import AuthPage from "./AuthPage";
 import DocumentsPage from "./DocumentsPage"; // Import the DocumentsPage component
-import { v4 as uuidv4 } from "uuid";
+import NotFound from "./NotFound";
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
-  const [documentId, setDocumentId] = useState("");
 
   // Check if the user is authenticated on component mount
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       setAuthenticated(true);
-      let storedDocumentId = localStorage.getItem("documentId");
-      if (!storedDocumentId) {
-        storedDocumentId = uuidv4();
-        localStorage.setItem("documentId", storedDocumentId);
-      }
-      setDocumentId(storedDocumentId);
     }
   }, []);
 
@@ -54,20 +45,20 @@ function App() {
           }
         />
 
-        {/* Route for document */}
+        {/* Routes for authenticated users */}
         {authenticated && (
           <>
-            <Route path="/" element={<Navigate to="/documents" />} />{" "}
             {/* Redirect to DocumentsPage */}
-            <Route path="/documents" element={<DocumentsPage />} />{" "}
+            <Route path="/" element={<Navigate to="/documents" />} />
             {/* Route for DocumentsPage */}
-            <Route path="/documents/:id" element={<TextDocument />} />{" "}
+            <Route path="/documents" element={<DocumentsPage />} />
             {/* Route for individual document */}
+            <Route path="/documents/:id" element={<TextDocument />} />
           </>
         )}
 
         {/* Route for 404 page */}
-        <Route path="*" element={<h1>404 - Not Found</h1>} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
