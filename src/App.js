@@ -1,3 +1,5 @@
+// App.js
+
 import React from "react";
 import {
   BrowserRouter as Router,
@@ -28,19 +30,18 @@ function App() {
         <Route path="/signup" element={<AuthPage authType="signup" />} />
 
         {/* Routes for authenticated users */}
-        {authenticated ? (
-          <>
-            {/* Redirect to DocumentsPage */}
-            <Route path="/" element={<Navigate to="/documents" />} />
-            {/* Route for DocumentsPage */}
-            <Route path="/documents" element={<DocumentsPage />} />
-            {/* Route for individual document */}
-            <Route path="/documents/:id" element={<TextDocument />} />
-          </>
-        ) : (
-          // Redirect to login page if not authenticated
-          <Route path="*" element={<Navigate to="/login" />} />
-        )}
+        <Route
+          path="/"
+          element={
+            authenticated ? (
+              <Navigate to="/documents" />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route path="/documents" element={<DocumentsPage />} />
+        <Route path="/documents/:id" element={<TextDocument />} />
 
         {/* Route for 404 page */}
         <Route path="*" element={<NotFound />} />

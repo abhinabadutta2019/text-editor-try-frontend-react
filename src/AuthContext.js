@@ -1,3 +1,5 @@
+// AuthProvider.js
+
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 export const AuthContext = createContext();
