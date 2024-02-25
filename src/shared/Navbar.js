@@ -1,9 +1,17 @@
+// Navbar.js
+
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext";
 
 const Navbar = () => {
   const { authenticated, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login"); // Redirect to the login page after logout
+  };
 
   return (
     <nav>
@@ -24,7 +32,7 @@ const Navbar = () => {
               <Link to="/documents">Documents</Link>
             </li>
             <li>
-              <button onClick={logout}>Logout</button>
+              <button onClick={handleLogout}>Logout</button>
             </li>
           </>
         )}
