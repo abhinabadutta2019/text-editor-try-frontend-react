@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import io from "socket.io-client";
 import "./TextDocument.css";
 import { useAuth } from "./AuthContext"; // Import useAuth hook
+import ShareButton from "./components/ShareButton"; // Import the ShareButton component
+import { FaCopy } from "react-icons/fa"; // Import the copy icon from react-icons
 
 const TextDocument = () => {
   const { id: roomId } = useParams();
@@ -61,7 +63,11 @@ const TextDocument = () => {
   return (
     <div className="text-document-container">
       <h2 className="document-title">Text Document</h2>
-      <button onClick={handleCopyToClipboard}>Copy URL to Clipboard</button>
+      <ShareButton /> {/* Render the ShareButton component */}
+      <p>Copy to clip board</p>
+      <button className="copy-url-btn" onClick={handleCopyToClipboard}>
+        <FaCopy />
+      </button>
       {copied && <p className="confirmation-message">URL Copied!</p>}
       <textarea
         className="custom-textarea"
