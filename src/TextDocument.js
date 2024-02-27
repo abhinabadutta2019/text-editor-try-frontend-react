@@ -14,7 +14,7 @@ const TextDocument = () => {
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
-    const socketIo = io("http://localhost:3003");
+    const socketIo = io(`${process.env.REACT_APP_API_URL}`);
 
     socketIo.emit("joinRoom", {
       roomId,
