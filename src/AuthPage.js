@@ -55,7 +55,7 @@ const AuthPage = () => {
 
   return (
     <>
-      <div className="container mt-5">
+      <div className="container mt-5 bg-light p-5">
         <h2 className="text-center mb-4">
           🧩 ScribbleSpace {isSignUp ? "Sign Up" : "Log In"}
         </h2>
