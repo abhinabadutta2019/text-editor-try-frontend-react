@@ -3,6 +3,7 @@ import { useParams, Navigate } from "react-router-dom";
 import io from "socket.io-client";
 import { useAuth } from "./AuthContext";
 import ShareButton from "./components/ShareButton";
+import Footer from "./shared/Footer";
 
 const TextDocument = () => {
   const { id: roomId } = useParams();
@@ -66,31 +67,32 @@ const TextDocument = () => {
   }
 
   return (
-    <div className="container mt-5 bg-light p-5">
-      <div className="row justify-content-center">
-        <div className="col-md-8">
-          <h2 className="document-title text-center mb-4 mt-0">
-            Scribble Text
-          </h2>
-          <ShareButton
-            handleCopyToClipboard={handleCopyToClipboard}
-            copied={copied}
-          />
-          <textarea
-            className="form-control mt-4"
-            value={text}
-            onChange={handleTextChange}
-            disabled={!authenticated}
-            style={{
-              width: "100%",
-              height: "600px", // Adjusted height to be similar to Google Docs
-              maxWidth: "8.26in",
-              maxHeight: "11.69in",
-            }}
-          />
+    <>
+      <div className="container mt-1">
+        <div className="row justify-content-center">
+          <div className="col-md-6">
+            <h4 className="document-title text-center mb-4">Scribble Text</h4>
+            <ShareButton
+              handleCopyToClipboard={handleCopyToClipboard}
+              copied={copied}
+            />
+            <textarea
+              className="form-control mt-4"
+              value={text}
+              onChange={handleTextChange}
+              disabled={!authenticated}
+              style={{
+                width: "100%",
+                height: "60vh", // Set height to 60% of viewport height
+                backgroundColor: "#f8f9fa", // Set off-white background color
+                border: "1px solid #ced4da", // Add border to match Bootstrap input styling
+              }}
+            />
+          </div>
         </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Footer from "./shared/Footer";
 
 const DocumentsPage = () => {
   const [documents, setDocuments] = useState([]);
@@ -60,31 +61,35 @@ const DocumentsPage = () => {
   };
 
   return (
-    <div className="container mt-5 text-center">
-      <h2 style={{ fontSize: "2rem" }}>Documents</h2>
-      <button onClick={handleCreateDocument} className="btn btn-primary mb-3">
-        Create New Document
-      </button>
-      <ul className="list-group text-left">
-        {documents.map((document) => (
-          <li
-            key={document._id}
-            className="list-group-item bg-transparent border-0"
-            style={{ fontSize: "1.2rem", outline: "none" }}
-          >
-            <Link
-              to={`/documents/${document._id}`}
-              style={{
-                textDecoration: "underline", // Add underline style
-                color: "inherit",
-              }}
+    <>
+      <div className="container mt-5 text-center">
+        <h2 style={{ fontSize: "2rem" }}>Documents</h2>
+        <button onClick={handleCreateDocument} className="btn btn-primary mb-3">
+          Create New Document
+        </button>
+        <ul className="list-group text-left">
+          {documents.map((document) => (
+            <li
+              key={document._id}
+              className="list-group-item bg-transparent border-0"
+              style={{ fontSize: "1.2rem", outline: "none" }}
             >
-              {truncateContent(document.content)}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+              <Link
+                to={`/documents/${document._id}`}
+                style={{
+                  textDecoration: "underline", // Add underline style
+                  color: "inherit",
+                }}
+              >
+                {truncateContent(document.content)}
+              </Link>
+            </li>
+          ))}
+        </ul>
+        {/*  */}
+      </div>
+      <Footer />
+    </>
   );
 };
 
