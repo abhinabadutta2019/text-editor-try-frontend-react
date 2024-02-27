@@ -1,3 +1,4 @@
+// AuthPage.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
@@ -9,7 +10,7 @@ const AuthPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const [isSignUp, setIsSignUp] = useState(true); // State to track the form type
+  const [isSignUp, setIsSignUp] = useState(false); // Initialize as false for login
 
   const authType = isSignUp ? "signup" : "login"; // Determine the current form type
 

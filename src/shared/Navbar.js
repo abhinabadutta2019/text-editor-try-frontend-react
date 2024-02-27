@@ -1,5 +1,4 @@
 // Navbar.js
-
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext";
@@ -10,7 +9,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     logout();
-    navigate("/login"); // Redirect to the login page after logout
+    navigate("/auth"); // Redirect to the auth page after logout
   };
 
   // Only render the Navbar if the user is authenticated

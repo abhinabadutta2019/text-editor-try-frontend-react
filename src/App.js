@@ -1,3 +1,4 @@
+// App.js
 import React from "react";
 import {
   BrowserRouter as Router,
@@ -21,34 +22,16 @@ function App() {
       <Navbar />
 
       <Routes>
-        {/* Route for login page */}
+        {/* Route for auth page */}
         <Route
-          path="/login"
-          element={
-            authenticated ? (
-              <Navigate to="/documents" />
-            ) : (
-              <AuthPage authType="login" />
-            )
-          }
-        />
-
-        {/* Route for signup page */}
-        <Route
-          path="/signup"
-          element={
-            authenticated ? (
-              <Navigate to="/documents" />
-            ) : (
-              <AuthPage authType="signup" />
-            )
-          }
+          path="/auth"
+          element={authenticated ? <Navigate to="/documents" /> : <AuthPage />}
         />
 
         {/* Route for authenticated users */}
         <Route
           path="/documents"
-          element={authenticated ? <DocumentsPage /> : <Navigate to="/login" />}
+          element={authenticated ? <DocumentsPage /> : <Navigate to="/auth" />}
         />
         <Route path="/documents/:id" element={<TextDocument />} />
 
@@ -62,7 +45,7 @@ function App() {
             authenticated ? (
               <Navigate to="/documents" />
             ) : (
-              <Navigate to="/login" />
+              <Navigate to="/auth" />
             )
           }
         />
