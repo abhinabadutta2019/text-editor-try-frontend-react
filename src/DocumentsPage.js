@@ -57,7 +57,7 @@ const DocumentsPage = () => {
 
   // Function to truncate the document content
   const truncateContent = (content) => {
-    return content.length > 40 ? content.substring(0, 40) + "..." : content;
+    return content.length > 80 ? content.substring(0, 80) + "..." : content;
   };
 
   return (
