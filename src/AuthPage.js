@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 
-const AuthPage = ({ authType }) => {
+const AuthPage = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [isSignUp, setIsSignUp] = useState(true); // State to track the form type
+
+  const authType = isSignUp ? "signup" : "login"; // Determine the current form type
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,7 +46,13 @@ const AuthPage = ({ authType }) => {
 
   return (
     <div>
-      <h2>{authType === "signup" ? "Sign Up" : "Log In"}</h2>
+      <h2>{isSignUp ? "Sign Up" : "Log In"}</h2>
+      {/* Toggle button to switch between Sign Up and Log In */}
+      <button onClick={() => setIsSignUp(!isSignUp)}>
+        {isSignUp
+          ? "Already have an account? Log In"
+          : "Don't have an account? Sign Up"}
+      </button>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">Username:</label>
@@ -64,9 +73,7 @@ const AuthPage = ({ authType }) => {
           />
         </div>
         {error && <div style={{ color: "red" }}>{error}</div>}
-        <button type="submit">
-          {authType === "signup" ? "Sign Up" : "Log In"}
-        </button>
+        <button type="submit">{isSignUp ? "Sign Up" : "Log In"}</button>
       </form>
     </div>
   );

@@ -13,29 +13,20 @@ const Navbar = () => {
     navigate("/login"); // Redirect to the login page after logout
   };
 
+  // Only render the Navbar if the user is authenticated
+  if (!authenticated) {
+    return null;
+  }
+
   return (
     <nav>
       <ul>
-        {!authenticated && (
-          <>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/signup">Sign Up</Link>
-            </li>
-          </>
-        )}
-        {authenticated && (
-          <>
-            <li>
-              <Link to="/documents">Documents</Link>
-            </li>
-            <li>
-              <button onClick={handleLogout}>Logout</button>
-            </li>
-          </>
-        )}
+        <li>
+          <Link to="/documents">Documents</Link>
+        </li>
+        <li>
+          <button onClick={handleLogout}>Logout</button>
+        </li>
       </ul>
     </nav>
   );
