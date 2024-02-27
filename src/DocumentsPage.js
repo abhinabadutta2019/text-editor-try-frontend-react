@@ -69,10 +69,16 @@ const DocumentsPage = () => {
         {documents.map((document) => (
           <li
             key={document._id}
-            className="list-group-item"
-            style={{ fontSize: "1.2rem" }}
+            className="list-group-item bg-transparent border-0"
+            style={{ fontSize: "1.2rem", outline: "none" }}
           >
-            <Link to={`/documents/${document._id}`}>
+            <Link
+              to={`/documents/${document._id}`}
+              style={{
+                textDecoration: "underline", // Add underline style
+                color: "inherit",
+              }}
+            >
               {truncateContent(document.content)}
             </Link>
           </li>
