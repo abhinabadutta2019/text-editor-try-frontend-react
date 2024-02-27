@@ -4,7 +4,6 @@ import io from "socket.io-client";
 import "./TextDocument.css";
 import { useAuth } from "./AuthContext";
 import ShareButton from "./components/ShareButton";
-import { FaCopy } from "react-icons/fa";
 
 const TextDocument = () => {
   const { id: roomId } = useParams();
@@ -70,12 +69,10 @@ const TextDocument = () => {
   return (
     <div className="text-document-container">
       <h2 className="document-title">Text Document</h2>
-      <ShareButton />
-      <p>Copy to clipboard</p>
-      <button className="copy-url-btn" onClick={handleCopyToClipboard}>
-        <FaCopy />
-      </button>
-      {copied && <p className="confirmation-message">URL Copied!</p>}
+      <ShareButton
+        handleCopyToClipboard={handleCopyToClipboard}
+        copied={copied}
+      />
       <textarea
         className="custom-textarea"
         value={text}
