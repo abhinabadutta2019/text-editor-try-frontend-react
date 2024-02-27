@@ -30,3 +30,14 @@ To run the application locally:
 - React
 - MongoDB
 - JSON Web Tokens (JWT)
+
+## Few Screenshots
+
+![image](https://github.com/abhinabadutta2019/text-editor-try-frontend-react/assets/118996650/ade52466-d616-4a64-b799-3a73d3c7300a)
+
+![image](https://github.com/abhinabadutta2019/text-editor-try-frontend-react/assets/118996650/09048ef4-5dca-432f-9ea4-44f4f5c412d3)
+
+![image](https://github.com/abhinabadutta2019/text-editor-try-frontend-react/assets/118996650/eb01074f-6e9f-4f86-a523-2ae0ee2f820e)
+
+
+ 
