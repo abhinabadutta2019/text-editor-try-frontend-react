@@ -14,7 +14,7 @@ const ShareButton = ({ handleCopyToClipboard, copied }) => {
 
   return (
     <div>
-      <h3>Share this document:</h3>
+      <h3>Share:</h3>
       <div style={{ display: "flex", alignItems: "center" }}>
         {/* Share via WhatsApp */}
         <WhatsappShareButton
@@ -30,9 +30,15 @@ const ShareButton = ({ handleCopyToClipboard, copied }) => {
         </TwitterShareButton>
       </div>
       {/* Copy to Clipboard */}
-      <div style={{ marginTop: "10px" }}>
+      {/* <div style={{ marginTop: "10px" }}>
         <button className="copy-url-btn" onClick={handleCopyToClipboard}>
           <FaCopy />
+        </button>
+        {copied && <p className="confirmation-message">URL Copied!</p>}
+      </div> */}
+      <div style={{ marginTop: "10px" }}>
+        <button className="copy-url-btn" onClick={handleCopyToClipboard}>
+          Copy to Clipboard
         </button>
         {copied && <p className="confirmation-message">URL Copied!</p>}
       </div>

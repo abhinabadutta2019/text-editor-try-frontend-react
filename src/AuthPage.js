@@ -1,4 +1,3 @@
-// AuthPage.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
@@ -10,9 +9,9 @@ const AuthPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const [isSignUp, setIsSignUp] = useState(false); // Initialize as false for login
+  const [isSignUp, setIsSignUp] = useState(false);
 
-  const authType = isSignUp ? "signup" : "login"; // Determine the current form type
+  const authType = isSignUp ? "signup" : "login";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,14 +40,21 @@ const AuthPage = () => {
       navigate("/documents");
     } catch (error) {
       console.error(error);
-      setError(error.message);
+      if (error.message.includes("Username or password is too short")) {
+        alert("Username or password is too short");
+      } else if (error.message.includes("Username already exists")) {
+        alert("Username already exists");
+      } else if (error.message.includes("Invalid password")) {
+        alert("Invalid password");
+      } else {
+        alert("Signup/Login failed");
+      }
     }
   };
 
   return (
     <div>
       <h2>{isSignUp ? "Sign Up" : "Log In"}</h2>
-      {/* Toggle button to switch between Sign Up and Log In */}
       <button onClick={() => setIsSignUp(!isSignUp)}>
         {isSignUp
           ? "Already have an account? Log In"
@@ -73,7 +79,6 @@ const AuthPage = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        {error && <div style={{ color: "red" }}>{error}</div>}
         <button type="submit">{isSignUp ? "Sign Up" : "Log In"}</button>
       </form>
     </div>

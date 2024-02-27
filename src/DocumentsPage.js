@@ -54,6 +54,11 @@ const DocumentsPage = () => {
     }
   };
 
+  // Function to truncate the document content
+  const truncateContent = (content) => {
+    return content.length > 40 ? content.substring(0, 40) + "..." : content;
+  };
+
   return (
     <div>
       <h2>Documents</h2>
@@ -61,7 +66,9 @@ const DocumentsPage = () => {
       <ul>
         {documents.map((document) => (
           <li key={document._id}>
-            <Link to={`/documents/${document._id}`}>{document.content}</Link>
+            <Link to={`/documents/${document._id}`}>
+              {truncateContent(document.content)}
+            </Link>
           </li>
         ))}
       </ul>
