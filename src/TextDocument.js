@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Navigate } from "react-router-dom";
 import io from "socket.io-client";
-import "./TextDocument.css";
 import { useAuth } from "./AuthContext";
 import ShareButton from "./components/ShareButton";
 
@@ -67,18 +66,30 @@ const TextDocument = () => {
   }
 
   return (
-    <div className="text-document-container">
-      <h2 className="document-title">Text Document</h2>
-      <ShareButton
-        handleCopyToClipboard={handleCopyToClipboard}
-        copied={copied}
-      />
-      <textarea
-        className="custom-textarea"
-        value={text}
-        onChange={handleTextChange}
-        disabled={!authenticated}
-      />
+    <div className="container mt-5 bg-light p-5">
+      <div className="row justify-content-center">
+        <div className="col-md-8">
+          <h2 className="document-title text-center mb-4 mt-0">
+            Scribble Text
+          </h2>
+          <ShareButton
+            handleCopyToClipboard={handleCopyToClipboard}
+            copied={copied}
+          />
+          <textarea
+            className="form-control mt-4"
+            value={text}
+            onChange={handleTextChange}
+            disabled={!authenticated}
+            style={{
+              width: "100%",
+              height: "600px", // Adjusted height to be similar to Google Docs
+              maxWidth: "8.26in",
+              maxHeight: "11.69in",
+            }}
+          />
+        </div>
+      </div>
     </div>
   );
 };

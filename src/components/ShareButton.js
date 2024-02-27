@@ -13,9 +13,12 @@ const ShareButton = ({ handleCopyToClipboard, copied }) => {
   const url = window.location.href; // Get the current URL
 
   return (
-    <div>
-      <h3>Share:</h3>
-      <div style={{ display: "flex", alignItems: "center" }}>
+    <div className="text-center">
+      {" "}
+      {/* Added Bootstrap text-center class */}
+      <div className="d-flex justify-content-center">
+        {" "}
+        {/* Added Bootstrap flex classes */}
         {/* Share via WhatsApp */}
         <WhatsappShareButton
           url={url}
@@ -29,15 +32,8 @@ const ShareButton = ({ handleCopyToClipboard, copied }) => {
           <TwitterIcon size={32} round={true} />
         </TwitterShareButton>
       </div>
-      {/* Copy to Clipboard */}
-      {/* <div style={{ marginTop: "10px" }}>
-        <button className="copy-url-btn" onClick={handleCopyToClipboard}>
-          <FaCopy />
-        </button>
-        {copied && <p className="confirmation-message">URL Copied!</p>}
-      </div> */}
       <div style={{ marginTop: "10px" }}>
-        <button className="copy-url-btn" onClick={handleCopyToClipboard}>
+        <button className="btn btn-primary" onClick={handleCopyToClipboard}>
           Copy to Clipboard
         </button>
         {copied && <p className="confirmation-message">URL Copied!</p>}
