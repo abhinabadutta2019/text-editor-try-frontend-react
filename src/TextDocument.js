@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams, Navigate } from "react-router-dom";
 import io from "socket.io-client";
 import "./TextDocument.css";
-import { useAuth } from "./AuthContext"; // Import useAuth hook
-import ShareButton from "./components/ShareButton"; // Import the ShareButton component
-import { FaCopy } from "react-icons/fa"; // Import the copy icon from react-icons
+import { useAuth } from "./AuthContext";
+import ShareButton from "./components/ShareButton";
+import { FaCopy } from "react-icons/fa";
 
 const TextDocument = () => {
   const { id: roomId } = useParams();
   const [text, setText] = useState("");
   const [socket, setSocket] = useState(null);
-  const { authenticated } = useAuth(); // Get authenticated user information
-  const [copied, setCopied] = useState(false); // State to track if URL is copied
+  const { authenticated } = useAuth();
+  const [copied, setCopied] = useState(false);
+  const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
     const socketIo = io("http://localhost:3003");
@@ -19,10 +20,14 @@ const TextDocument = () => {
     socketIo.emit("joinRoom", {
       roomId,
       userId: localStorage.getItem("userId"),
-    }); // Pass user ID to the server
+    });
 
     socketIo.on("updateText", (data) => {
       setText(data);
+    });
+
+    socketIo.on("documentNotFound", () => {
+      setNotFound(true);
     });
 
     setSocket(socketIo);
@@ -39,32 +44,34 @@ const TextDocument = () => {
       roomId,
       newText,
       userId: localStorage.getItem("userId"),
-    }); // Pass user ID to the server
+    });
   };
 
   const handleCopyToClipboard = () => {
     const currentURL = window.location.href;
 
-    // Use the Clipboard API to copy the current URL to the clipboard
     navigator.clipboard
       .writeText(currentURL)
       .then(() => {
-        console.log("URL copied to clipboard");
-        setCopied(true); // Update state to indicate URL is copied
+        setCopied(true);
         setTimeout(() => {
-          setCopied(false); // Reset state after 2 seconds
-        }, 2000); // Reset after 2 seconds
+          setCopied(false);
+        }, 2000);
       })
       .catch((error) => {
         console.error("Error copying to clipboard:", error);
       });
   };
 
+  if (notFound) {
+    return <Navigate to="/404" />;
+  }
+
   return (
     <div className="text-document-container">
       <h2 className="document-title">Text Document</h2>
-      <ShareButton /> {/* Render the ShareButton component */}
-      <p>Copy to clip board</p>
+      <ShareButton />
+      <p>Copy to clipboard</p>
       <button className="copy-url-btn" onClick={handleCopyToClipboard}>
         <FaCopy />
       </button>
@@ -73,7 +80,7 @@ const TextDocument = () => {
         className="custom-textarea"
         value={text}
         onChange={handleTextChange}
-        disabled={!authenticated} // Disable textarea if the user is not authenticated
+        disabled={!authenticated}
       />
     </div>
   );
