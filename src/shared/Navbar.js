@@ -19,6 +19,9 @@ const Navbar = () => {
 
   return (
     <nav>
+      <h1>
+        <Link to="/">GloryDocs</Link> {/* App name linked to home route */}
+      </h1>
       <ul>
         <li>
           <Link to="/documents">Documents</Link>
