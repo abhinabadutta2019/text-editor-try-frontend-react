@@ -60,12 +60,18 @@ const DocumentsPage = () => {
   };
 
   return (
-    <div>
-      <h2>Documents</h2>
-      <button onClick={handleCreateDocument}>Create New Document</button>
-      <ul>
+    <div className="container mt-5 text-center">
+      <h2 style={{ fontSize: "2rem" }}>Documents</h2>
+      <button onClick={handleCreateDocument} className="btn btn-primary mb-3">
+        Create New Document
+      </button>
+      <ul className="list-group text-left">
         {documents.map((document) => (
-          <li key={document._id}>
+          <li
+            key={document._id}
+            className="list-group-item"
+            style={{ fontSize: "1.2rem" }}
+          >
             <Link to={`/documents/${document._id}`}>
               {truncateContent(document.content)}
             </Link>
