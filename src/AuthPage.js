@@ -53,34 +53,48 @@ const AuthPage = () => {
   };
 
   return (
-    <div>
-      <h2>🧩 ScribbleSpace {isSignUp ? "Sign Up" : "Log In"}</h2>
-      <button onClick={() => setIsSignUp(!isSignUp)}>
-        {isSignUp
-          ? "Already have an account? Log In"
-          : "Don't have an account? Sign Up"}
-      </button>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button type="submit">{isSignUp ? "Sign Up" : "Log In"}</button>
-      </form>
+    <div className="container mt-5">
+      <h2 className="text-center mb-4">
+        🧩 ScribbleSpace {isSignUp ? "Sign Up" : "Log In"}
+      </h2>
+      <div className="d-flex justify-content-center">
+        <form onSubmit={handleSubmit} className="w-50">
+          <div className="mb-3">
+            <label htmlFor="username" className="form-label">
+              Username:
+            </label>
+            <input
+              type="text"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="form-control"
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">
+              Password:
+            </label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="form-control"
+            />
+          </div>
+          <button type="submit" className="btn btn-primary w-100">
+            {isSignUp ? "Sign Up" : "Log In"}
+          </button>
+        </form>
+      </div>
+      <div className="text-center mt-3">
+        <button onClick={() => setIsSignUp(!isSignUp)} className="btn btn-link">
+          {isSignUp
+            ? "Already have an account? Log In"
+            : "Don't have an account? Sign Up"}
+        </button>
+      </div>
     </div>
   );
 };
