@@ -1,8 +1,8 @@
-# Text Editor Try
+# Scribble-Space Text editor
 
 ## Overview
 
-Text Editor Try is a simple collaborative text editor application built with Node.js, Express, Socket.io, React, and MongoDB. It allows multiple users to collaborate in real-time on editing text documents.
+Scribble-Space Text editor is a simple collaborative text editor application built with Node.js, Express, Socket.io, React, and MongoDB. It allows multiple users to collaborate in real-time on editing text documents.
 
 ## Features
 
