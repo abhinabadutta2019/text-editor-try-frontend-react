@@ -54,7 +54,7 @@ const AuthPage = () => {
 
   return (
     <div>
-      <h2>{isSignUp ? "Sign Up" : "Log In"}</h2>
+      <h2>🧩 ScribbleSpace {isSignUp ? "Sign Up" : "Log In"}</h2>
       <button onClick={() => setIsSignUp(!isSignUp)}>
         {isSignUp
           ? "Already have an account? Log In"

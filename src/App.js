@@ -12,6 +12,7 @@ import DocumentsPage from "./DocumentsPage";
 import NotFound from "./NotFound";
 import { useAuth } from "./AuthContext";
 import Navbar from "./shared/Navbar"; // Import the Navbar component
+import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
 
 function App() {
   const { authenticated } = useAuth();
